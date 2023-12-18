@@ -20,15 +20,7 @@ int main() {
         {PetState::downRight, "./sprites/down-right.png"}
     };
 
-    Pet pet;
-
-    pet.setSize({128, 128});
-    pet.setPosition({64, 64});
-    pet.setSpritePathMap(spritePaths);
-    
-    pet.loadAllTextures();
-    
-    pet.setState(PetState::center);
+    Pet pet = Pet({128, 128}, {64, 64}, spritePaths);
 
     // Loading a static background image and resizing it to fill the window
     Texture2D bg = LoadTexture("./sprites/background.png");
@@ -61,13 +53,10 @@ int main() {
             pet.setState(PetState::right);
         } else {
             pet.setState(PetState::center);
-            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-                pet.onClick();
-            }
         }
     }
-    if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-        pet.onRelease();
+    if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+        pet.onClick(mouseX);
     }
         
         BeginDrawing();

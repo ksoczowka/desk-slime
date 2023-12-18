@@ -19,6 +19,7 @@ enum class PetState {
 class Pet {
 public:
     Pet();
+    Pet(Vector2 size, Vector2 position, std::map<PetState, std::string> spritePathMap);
 
     PetState getState() { return state_; }
 
@@ -37,8 +38,7 @@ public:
     void setPosition(const Vector2& newPosition) { position_ = newPosition; }
     void setSize(const Vector2& newSize) { size_ = newSize; }
 
-    void onClick();
-    void onRelease();
+    void onClick(const int& destination);
 
     // Converts image from path to the Texture2D. todo: make it private and auto
     void makeTexture();
@@ -47,11 +47,7 @@ public:
 
 
     void loadAllTextures();
-
-    void secret();
 private:
-    int clickCount_;
-
     PetState state_ = PetState::center;
 
     std::map<PetState, std::string> spritePathMap_;
@@ -59,6 +55,7 @@ private:
 
     Texture2D texture_;
 
+    Vector2 origin_;
     Vector2 position_;
     Vector2 size_;
 };
