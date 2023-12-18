@@ -61,7 +61,13 @@ int main() {
             pet.setState(PetState::right);
         } else {
             pet.setState(PetState::center);
+            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                pet.onClick();
+            }
         }
+    }
+    if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+        pet.onRelease();
     }
         
         BeginDrawing();

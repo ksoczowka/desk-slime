@@ -13,8 +13,7 @@ enum class PetState {
     upLeft = 5,
     upRight = 6,
     downLeft = 7,
-    downRight = 8,
-    clicked = 10
+    downRight = 8
 };
 
 class Pet {
@@ -38,6 +37,9 @@ public:
     void setPosition(const Vector2& newPosition) { position_ = newPosition; }
     void setSize(const Vector2& newSize) { size_ = newSize; }
 
+    void onClick();
+    void onRelease();
+
     // Converts image from path to the Texture2D. todo: make it private and auto
     void makeTexture();
     // Use in raylib drawing mode! Draws pet on the screen with proper settings.
@@ -45,7 +47,10 @@ public:
 
 
     void loadAllTextures();
+
+    void secret();
 private:
+    int clickCount_;
 
     PetState state_ = PetState::center;
 

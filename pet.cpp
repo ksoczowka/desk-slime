@@ -10,6 +10,22 @@ void Pet::setState(const PetState& newState) {
     makeTexture();
 }
 
+void Pet::onClick() {
+    size_.x = 120;
+    size_.y = 120;
+
+    position_.x = 68;
+    position_.y = 68;
+}
+void Pet::onRelease() {
+    size_.x = 128;
+    size_.y = 128;
+
+    position_.x = 64;
+    position_.y = 64;
+    clickCount_++;
+}
+
 void Pet::makeTexture() {
     texture_ = textureMap_.at(state_);
 
@@ -26,5 +42,11 @@ void Pet::loadAllTextures() {
     for(const auto& [key, value] : spritePathMap_) {
         Texture2D buff = LoadTexture(value.c_str());
         textureMap_.emplace(std::make_pair(key, buff));
+    }
+}
+
+void Pet::secret() {
+    if(clickCount_ == 10) {
+        clickCount_ = 0;
     }
 }
